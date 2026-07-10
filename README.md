@@ -27,7 +27,7 @@ pnpm run dev
 - `assets/`, diagrams referenced via relative paths in slides
 
 ## Images to drop into `public/`
-- `ruben.jpg`, speaker photo (slide: *Who am I?*)
+- `ruben.jpg`, speaker photo
 - `robotics-job.jpg`, old robotics gig (optional click step on *Who am I?*)
 
 The deck renders fine without them; missing images are hidden via `onerror`.
