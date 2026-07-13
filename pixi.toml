@@ -18,7 +18,7 @@ cmd = "pnpm install"
 inputs = ["package.json", "pnpm-lock.yaml"]
 outputs = ["node_modules/.modules.yaml"]
 
-[tasks.dev]
+[tasks.start]
 cmd = "pnpm run dev"
 depends-on = ["install-deps"]
 description = "Run the deck locally with hot reload"

@@ -26,29 +26,6 @@ Ruben Arts at <img src="/prefix-logo.svg" class="inline align-middle h-5 mx-1" a
 
 <div class="subtitle mt-8">SciPy 2026 · <a href="https://pixi.sh">pixi.sh</a></div>
 
----
-
-# You and your friends are joining the group!
-
-<div class="mt-2">
-
-
-</div>
-
-- **[Python](https://github.com/python/cpython/tree/main/Tools/pixi-packages)** · `Tools/pixi-packages/` · managed builds: ASAN, freethreading, TSAN
-- **[NumPy](https://github.com/numpy/numpy/tree/main/pixi-packages)** · `pixi-packages/` · transitive source builds: ASAN, freethreading, TSAN
-- **[SciPy](https://github.com/scipy/scipy/blob/main/pixi.toml)** · `pixi.toml` · 30+ environments across platforms and users
-- **[pandas](https://github.com/pandas-dev/pandas/blob/main/pixi.toml)** · `pixi.toml` · development environments and a big test matrix, incl. freethreading
-- **[Xarray](https://github.com/pydata/xarray/blob/main/pixi.toml)** · `pixi.toml` · development environments and a big test matrix, incl. nightly builds
-- And many more projects in the scientific Python ecosystem
-
-<div class="absolute right-12 bottom-16 w-128 flex flex-wrap items-center justify-end gap-x-8 gap-y-6 opacity-90">
-  <img src="/python.svg" class="h-14" alt="Python" />
-  <img src="/numpy.svg" class="h-18" alt="NumPy" />
-  <img src="/scipy.svg" class="h-18" alt="SciPy" />
-  <img src="/pandas.svg" class="h-18" alt="pandas" />
-  <img src="/xarray.svg" class="h-18" alt="Xarray" />
-</div>
 
 ---
 
@@ -155,7 +132,7 @@ outputs = ["_site/**"]
 
 ---
 
-# Trust: it's not a toy, it's in their CI
+# CI made easy
 
 <DocLink href="https://pixi.prefix.dev/latest/integration/ci/github_actions/" label="GitHub Actions" />
 
@@ -183,21 +160,64 @@ steps:
 
 <v-clicks>
 
-- **Local == CI**: the green check runs `pixi run test`, same lockfile, same env, same command
+- **Local == CI**: same lockfile, same env, same command
 - A new contributor doesn't read a wiki; they run `pixi run <task>`
 - SciPy's CI goes further and **[builds conda packages](https://github.com/scipy/scipy/blob/main/.github/workflows/pixi-packages.yml)**
 
 </v-clicks>
 
 ---
+
+# Demo: see to believe
+
+- Build python and numpy from source!
+
+<div class="flex justify-center mt-2">
+  <img src="/python-numpy-source-build.png" class="h-90 rounded-md shadow-lg" alt="pixi.toml building CPython and NumPy from git source, with pixi run start output" />
+</div>
+
+---
+
+# You and your friends are joining the group!
+
+<div class="mt-2">
+
+
+</div>
+
+- **[Python](https://github.com/python/cpython/tree/main/Tools/pixi-packages)** · `Tools/pixi-packages/` · managed builds: ASAN, freethreading, TSAN
+- **[NumPy](https://github.com/numpy/numpy/tree/main/pixi-packages)** · `pixi-packages/` · transitive source builds: ASAN, freethreading, TSAN
+- **[SciPy](https://github.com/scipy/scipy/blob/main/pixi.toml)** · `pixi.toml` · 30+ environments across platforms and users
+- **[pandas](https://github.com/pandas-dev/pandas/blob/main/pixi.toml)** · `pixi.toml` · development environments and a big test matrix, incl. freethreading
+- **[Xarray](https://github.com/pydata/xarray/blob/main/pixi.toml)** · `pixi.toml` · development environments and a big test matrix, incl. nightly builds
+- **[cuda-python](https://github.com/NVIDIA/cuda-python/blob/main/pixi.toml)** · `pixi.toml` · monorepo orchestration: root tasks fan out to sub-package manifests, in CUDA 12 & 13 environments
+- And many more projects in the scientific Python ecosystem
+
+<div class="absolute right-12 bottom-16 w-256 flex flex-wrap items-center justify-end gap-x-8 gap-y-6 opacity-90">
+  <img src="/python.svg" class="h-10" alt="Python" />
+  <img src="/numpy.svg" class="h-12" alt="NumPy" />
+  <img src="/scipy.svg" class="h-12" alt="SciPy" />
+  <img src="/pandas.svg" class="h-12" alt="pandas" />
+  <img src="/xarray.svg" class="h-12" alt="Xarray" />
+  <img src="/nvidia.svg" class="h-8" alt="NVIDIA" />
+</div>
+
+---
 layout: center
+class: text-center
 ---
 
 # So, why did they all adopt it?
 
-## Three things every one of these projects needed
+<div class="flex justify-center mt-6">
+<div class="text-left">
 
-build from source · many environments · many platforms
+- build from source
+- simplfy complex build environments
+- reproducible across platforms
+
+</div>
+</div>
 
 ---
 
@@ -342,7 +362,7 @@ platforms = ["linux-64", "linux-aarch64",
 
 ---
 
-# ...and it doesn't stop there
+# Build and Ship a package: `pixi publish`
 
 <DocLink href="https://pixi.prefix.dev/latest/reference/cli/pixi/publish/" label="pixi publish" />
 
@@ -351,16 +371,44 @@ platforms = ["linux-64", "linux-aarch64",
 <Terminal title="build & ship a package">
   <TermLine>pixi publish --target-channel https://prefix.dev/my-channel</TermLine>
   <TermLine output>✓ built · pushed · attested (OIDC)</TermLine>
+</Terminal>
+
+<div>
+
+<v-clicks>
+
+- **Publish** your package to a channel, SciPy already does this [in CI](https://github.com/scipy/scipy/blob/main/.github/workflows/pixi-packages.yml)
+- 
+- **Trusted publishing**: OIDC, attestations, no long-lived tokens
+
+</v-clicks>
+
+</div>
+
+</div>
+
+---
+
+# Ship a whole environment: `pixi pack`
+
+<DocLink href="https://pixi.prefix.dev/latest/deployment/pixi_pack/" label="pixi pack" />
+
+<div class="grid grid-cols-2 gap-6 mt-4 items-start">
+
+<Terminal title="freeze the environment">
   <TermLine>pixi pack --platform linux-64</TermLine>
   <TermLine output>📦 environment.tar, no pixi/conda needed on target</TermLine>
 </Terminal>
 
 <div>
 
-- **Publish** to a channel, SciPy already does this [in CI](https://github.com/scipy/scipy/blob/main/.github/workflows/pixi-packages.yml)
-- **`pixi pack`** freezes a whole env for air-gapped / cluster runs
-- **[rattler-build](https://rattler.build)** · the Rust `conda-build` replacement conda-forge is migrating to
-- **Trusted publishing**: OIDC, attestations, no long-lived tokens
+<v-clicks>
+
+- Freezes the **locked environment** into a single archive
+- Made for **air-gapped / cluster** runs: nothing to install on the target
+- Unpack and run: the same lockfile-exact environment, anywhere
+
+</v-clicks>
 
 </div>
 
