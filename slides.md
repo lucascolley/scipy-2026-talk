@@ -5,7 +5,7 @@ title: They all have a pixi.toml. Why?
 info: |
   ## Scipy, Numpy, Xarray and Python all have a pixi.toml. Why?
   After 3 years, Pixi is widely adopted in the scientific Python ecosystem.
-  SciPy 2026 · Ruben Arts · prefix.dev
+  SciPy 2026, Ruben Arts, prefix.dev
 class: text-center
 drawings:
   persist: false
@@ -24,7 +24,7 @@ transition: null
 
 Ruben Arts at <img src="/prefix-logo.svg" class="inline align-middle h-5 mx-1" alt="prefix.dev" />
 
-<div class="subtitle mt-8">SciPy 2026 · <a href="https://pixi.sh">pixi.sh</a></div>
+<div class="subtitle mt-8">SciPy 2026 - <a href="https://pixi.sh">pixi.sh</a></div>
 
 
 ---
@@ -51,9 +51,9 @@ One manifest describes a whole project:
 
 It replaces the pile you keep in your README:
 
-- `apt` · `brew` · `pip` · `conda`
-- `virtualenv` · `venv` · `conda env`
-- Makefiles · shell scripts · CI YAML
+- `apt`, `brew`, `pip`, `conda`
+- `virtualenv`, `venv`, `conda env`
+- Makefiles, shell scripts, CI YAML
 
 </div>
 </div>
@@ -123,7 +123,7 @@ outputs = ["_site/**"]
 - `depends-on` builds a graph, pixi runs it in order, parallel where it can
 - Tasks take **arguments**, `cwd`, and per-task **environment activation**
 - `inputs`/`outputs` add **caching**, unchanged work is skipped
-- `pixi run <task>` replaces the Makefile · shell script · CI-YAML pile
+- `pixi run <task>` replaces the Makefile, shell script, CI-YAML pile
 
 </v-clicks>
 
@@ -185,12 +185,12 @@ steps:
 
 </div>
 
-- **[Python](https://github.com/python/cpython/tree/main/Tools/pixi-packages)** · `Tools/pixi-packages/` · managed builds: ASAN, freethreading, TSAN
-- **[NumPy](https://github.com/numpy/numpy/tree/main/pixi-packages)** · `pixi-packages/` · transitive source builds: ASAN, freethreading, TSAN
-- **[SciPy](https://github.com/scipy/scipy/blob/main/pixi.toml)** · `pixi.toml` · 30+ environments across platforms and users
-- **[pandas](https://github.com/pandas-dev/pandas/blob/main/pixi.toml)** · `pixi.toml` · development environments and a big test matrix, incl. freethreading
-- **[Xarray](https://github.com/pydata/xarray/blob/main/pixi.toml)** · `pixi.toml` · development environments and a big test matrix, incl. nightly builds
-- **[cuda-python](https://github.com/NVIDIA/cuda-python/blob/main/pixi.toml)** · `pixi.toml` · monorepo orchestration: root tasks fan out to sub-package manifests, in CUDA 12 & 13 environments
+- **[Python](https://github.com/python/cpython/tree/main/Tools/pixi-packages)** - `Tools/pixi-packages/` - managed builds: ASAN, freethreading, TSAN
+- **[NumPy](https://github.com/numpy/numpy/tree/main/pixi-packages)** - `pixi-packages/` - transitive source builds: ASAN, freethreading, TSAN
+- **[SciPy](https://github.com/scipy/scipy/blob/main/pixi.toml)** - `pixi.toml` - 30+ environments across platforms and users
+- **[pandas](https://github.com/pandas-dev/pandas/blob/main/pixi.toml)** - `pixi.toml` - development environments and a big test matrix, incl. freethreading
+- **[Xarray](https://github.com/pydata/xarray/blob/main/pixi.toml)** - `pixi.toml` - development environments and a big test matrix, incl. nightly builds
+- **[cuda-python](https://github.com/NVIDIA/cuda-python/blob/main/pixi.toml)** - `pixi.toml` - monorepo orchestration: root tasks fan out to sub-package manifests, in CUDA 12 & 13 environments
 - And many more projects in the scientific Python ecosystem
 
 <div class="absolute right-12 bottom-16 w-256 flex flex-wrap items-center justify-end gap-x-8 gap-y-6 opacity-90">
@@ -343,8 +343,8 @@ platforms = [
 ```toml {lines: true}
 platforms = ["linux-64", "linux-aarch64",
              "osx-64", "osx-arm64", "win-64"]
-# py311/py312/py313/py314 · minimum-versions
-# numpy-nightly · downstream · freethreading
+# py311/py312/py313/py314, minimum-versions
+# numpy-nightly, downstream, freethreading
 ```
 
 </CodeWindow>
@@ -370,7 +370,7 @@ platforms = ["linux-64", "linux-aarch64",
 
 <Terminal title="build & ship a package">
   <TermLine>pixi publish --target-channel https://prefix.dev/my-channel</TermLine>
-  <TermLine output>✓ built · pushed · attested (OIDC)</TermLine>
+  <TermLine output>✓ built, pushed, attested (OIDC)</TermLine>
 </Terminal>
 
 <div>
@@ -456,12 +456,12 @@ That's the file Python, NumPy, SciPy, pandas and Xarray all committed. That's th
 <div>
 
 <Terminal title="pick where you are">
-  <TermLine output v-click="1"># 1 · start fresh</TermLine>
+  <TermLine output v-click="1"># 1. start fresh</TermLine>
   <TermLine v-click="1">pixi init my-analysis && cd my-analysis</TermLine>
   <TermLine v-click="1">pixi add python numpy matplotlib</TermLine>
-  <TermLine output v-click="2"># 2 · coming from conda / mamba</TermLine>
+  <TermLine output v-click="2"># 2. coming from conda / mamba</TermLine>
   <TermLine v-click="2">pixi init --import environment.yml</TermLine>
-  <TermLine output v-click="3"># 3 · already a Python package</TermLine>
+  <TermLine output v-click="3"># 3. already a Python package</TermLine>
   <TermLine v-click="3">pixi init --format pyproject</TermLine>
 </Terminal>
 
@@ -592,15 +592,15 @@ class: text-center
 # Thanks, SciPy.
 
 Read the real files:
-[python](https://github.com/python/cpython/tree/main/Tools/pixi-packages) ·
-[numpy](https://github.com/numpy/numpy/tree/main/pixi-packages) ·
-[scipy](https://github.com/scipy/scipy/blob/main/pixi.toml) ·
-[pandas](https://github.com/pandas-dev/pandas/blob/main/pixi.toml) ·
+[python](https://github.com/python/cpython/tree/main/Tools/pixi-packages),
+[numpy](https://github.com/numpy/numpy/tree/main/pixi-packages),
+[scipy](https://github.com/scipy/scipy/blob/main/pixi.toml),
+[pandas](https://github.com/pandas-dev/pandas/blob/main/pixi.toml),
 [xarray](https://github.com/pydata/xarray/blob/main/pixi.toml)
 
 <div class="mt-6">
 
-[pixi.sh](https://pixi.sh) · [prefix.dev](https://prefix.dev) · [github.com/prefix-dev](https://github.com/prefix-dev)
+[pixi.sh](https://pixi.sh) - [prefix.dev](https://prefix.dev) - [github.com/prefix-dev](https://github.com/prefix-dev)
 
 </div>
 

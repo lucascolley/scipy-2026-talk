@@ -3,7 +3,7 @@ withDefaults(
   defineProps<{
     /** Docs URL this slide's content is based on */
     href: string
-    /** Short label, e.g. "tasks" — rendered as "docs · tasks" */
+    /** Short label, e.g. "tasks", rendered as "docs: tasks" */
     label?: string
   }>(),
   { label: '' }
@@ -13,7 +13,7 @@ withDefaults(
 <template>
   <a class="doc-link" :href="href" target="_blank" rel="noopener" :title="`Open the pixi docs${label ? `: ${label}` : ''}`">
     <carbon-book class="doc-link__icon" />
-    <span>docs<template v-if="label"> · {{ label }}</template></span>
+    <span>docs<template v-if="label">: {{ label }}</template></span>
   </a>
 </template>
 
