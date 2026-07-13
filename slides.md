@@ -17,6 +17,7 @@ transition: null
 <div class="relative mx-auto w-48">
   <img src="/paxton.png" class="w-full" alt="Paxton" />
 </div>
+<img src="/slides-qr-code.png" class="absolute top-8 right-8 w-35" alt="Slides QR code" />
 
 # Scipy, Numpy, Xarray and Python
 
@@ -447,7 +448,7 @@ That's the file Python, NumPy, SciPy, pandas and Xarray all committed. That's th
 
 ---
 
-# Your turn: pick your on-ramp
+# Your turn
 
 <DocLink href="https://pixi.prefix.dev/latest/reference/cli/pixi/init/" label="pixi init" />
 
@@ -498,7 +499,7 @@ Whatever the mode: commit `pixi.toml` **and** `pixi.lock`, teammates just `pixi 
 
 ---
 
-# Step 4: grow the environment into a package
+# Grow the environment into a package
 
 <DocLink href="https://pixi.prefix.dev/latest/build/dev/" label="dev packages" />
 
@@ -550,17 +551,12 @@ pytest = "*"
 
 <v-clicks>
 
-- **Try Pixi** for your own research and tell us what breaks
-- **Contribute to conda-forge**: add the packages your field needs, so everyone can `pixi add` them
-- **Share it** with your peers and help them make their work reproducible
+- **Try Pixi** share your experience and help us and other improve it.
+- **[Contribute to conda-forge](https://conda-forge.org/docs/maintainer/adding_pkgs/)**: add the packages your field needs, so everyone can `pixi add` them
+- **Join our [Discord](https://discord.gg/kKV8ZxyzY4)** and help us and others with your experience, or just hang out and chat.
 
 </v-clicks>
 
-<div v-click class="mt-8 text-center text-xl">
-
-`curl -fsSL https://pixi.sh/install.sh | sh`
-
-</div>
 
 ---
 
@@ -570,7 +566,7 @@ pytest = "*"
 
 <div>
 
-We build Pixi, rattler-build, and the open-source `rattler` core, and keep them free.
+We build Pixi, rattler-build, and the `rattler` core, and keep them free.
 
 - Public, private & on-premise **channels** for your team
 - Security-first: OIDC, attestations, CVE mapping, reproducible builds
@@ -591,12 +587,15 @@ class: text-center
 
 # Thanks, SciPy.
 
+<img src="/slides-qr-code.png" class="absolute top-8 right-8 w-35" alt="Slides QR code" />
+
 Read the real files:
 [python](https://github.com/python/cpython/tree/main/Tools/pixi-packages),
 [numpy](https://github.com/numpy/numpy/tree/main/pixi-packages),
 [scipy](https://github.com/scipy/scipy/blob/main/pixi.toml),
 [pandas](https://github.com/pandas-dev/pandas/blob/main/pixi.toml),
-[xarray](https://github.com/pydata/xarray/blob/main/pixi.toml)
+[xarray](https://github.com/pydata/xarray/blob/main/pixi.toml),
+[cuda-python](https://github.com/NVIDIA/cuda-python/blob/main/pixi.toml)
 
 <div class="mt-6">
 
