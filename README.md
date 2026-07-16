@@ -5,7 +5,7 @@ Slidev deck for the SciPy 2026 presentation.
 ## Run it (with pixi)
 
 ```bash
-pixi run dev      # http://localhost:3030
+pixi run start    # http://localhost:3030
 pixi run build    # static site to ./dist
 pixi run export   # PDF export
 ```
