@@ -34,7 +34,7 @@ Ruben Arts at <img src="/prefix-logo.svg" class="inline align-middle h-5 mx-1" a
 
 <DocLink href="https://pixi.prefix.dev/latest/getting_started/" label="getting started" />
 
-Cross-platform, environment management and reproducible build tool for any language.
+Cross-platform, environment management and build tool for any language.
 <div class="grid grid-cols-2 gap-8 mt-6">
 
 <div>
@@ -121,7 +121,7 @@ outputs = ["_site/**"]
 <v-clicks>
 
 - One name, the **same command** on every OS and machine
-- `depends-on` builds a graph, pixi runs it in order, parallel where it can
+- `depends-on` builds a graph, pixi runs it in order
 - Tasks take **arguments**, `cwd`, and per-task **environment activation**
 - `inputs`/`outputs` add **caching**, unchanged work is skipped
 - `pixi run <task>` replaces the Makefile, shell script, CI-YAML pile
@@ -133,7 +133,7 @@ outputs = ["_site/**"]
 
 ---
 
-# CI made easy
+# Basics: CI made easy
 
 <DocLink href="https://pixi.prefix.dev/latest/integration/ci/github_actions/" label="GitHub Actions" />
 
@@ -162,20 +162,10 @@ steps:
 <v-clicks>
 
 - **Local == CI**: same lockfile, same env, same command
-- A new contributor doesn't read a wiki; they run `pixi run <task>`
-- SciPy's CI goes further and **[builds conda packages](https://github.com/scipy/scipy/blob/main/.github/workflows/pixi-packages.yml)**
+- This makes your setup CI system agnostics
+- Very easy caching setup so runs are really fast
 
 </v-clicks>
-
----
-
-# Demo: see to believe
-
-- Build python and numpy from source!
-
-<div class="flex justify-center mt-2">
-  <img src="/python-numpy-source-build.png" class="h-90 rounded-md shadow-lg" alt="pixi.toml building CPython and NumPy from git source, with pixi run start output" />
-</div>
 
 ---
 
@@ -219,6 +209,22 @@ class: text-center
 
 </div>
 </div>
+
+---
+
+# Demo:
+
+- Build Python from source!
+
+<Terminal title="install a prerelease CPython, globally">
+  <TermLine>pixi global install \</TermLine>
+  <div class="term-line pl-8">--git https://github.com/python/cpython \</div>
+  <div class="term-line pl-8">--subdir Tools/pixi-packages/default \</div>
+  <div class="term-line pl-8">--tag v3.15.0b3 \</div>
+  <div class="term-line pl-8">--force-reinstall \</div>
+  <div class="term-line pl-8">python</div>
+</Terminal>
+
 
 ---
 
@@ -344,6 +350,7 @@ platforms = [
 ```toml {lines: true}
 platforms = ["linux-64", "linux-aarch64",
              "osx-64", "osx-arm64", "win-64"]
+# environments:
 # py311/py312/py313/py314, minimum-versions
 # numpy-nightly, downstream, freethreading
 ```
@@ -360,6 +367,84 @@ platforms = ["linux-64", "linux-aarch64",
 - pandas runs a whole **test matrix** from one manifest
 
 </v-clicks>
+
+---
+
+# Notable recent improvements
+
+<DocLink href="https://pixi.prefix.dev/latest/reference/pixi_manifest/" label="manifest" />
+
+<div class="grid grid-cols-3 gap-4 mt-6 items-start">
+
+<div v-click="1">
+
+**Conditional dependencies**
+
+<CodeWindow title="pixi.toml">
+
+```toml
+[dependencies.unix-helper]
+version = "*"
+when = "__unix"
+
+[dependencies.cupy]
+version = "*"
+when = "__cuda >= 13.0"
+
+[dependencies.typing-ext]
+version = "*"
+when = "python < 3.12"
+```
+
+</CodeWindow>
+
+</div>
+
+<div v-click="2">
+
+**Extras**
+
+<CodeWindow title="pixi.toml">
+
+```toml
+[dependencies.my-pkg]
+version = "*"
+extras = ["plot"]
+
+[pypi-dependencies.pandas]
+version = ">=2"
+extras = ["excel"]
+```
+
+</CodeWindow>
+
+</div>
+
+<div v-click="3">
+
+**Workspace dependencies**
+
+<CodeWindow title="pixi.toml">
+
+```toml
+[workspace.dependencies]
+numpy = "1.*"
+
+[workspace.dependencies.shared-lib]
+path = "packages/shared-lib"
+
+# members inherit the pin
+[package.run-dependencies]
+numpy = { workspace = true }
+shared-lib = { workspace = true }
+```
+
+</CodeWindow>
+
+</div>
+
+</div>
+
 
 ---
 
@@ -588,6 +673,8 @@ class: text-center
 # Thanks, SciPy.
 
 <img src="/slides-qr-code.png" class="absolute top-8 right-8 w-35" alt="Slides QR code" />
+
+<img src="/prefix-logo.svg" class="h-24 mx-auto mt-4 mb-6" alt="prefix.dev" />
 
 Read the real files:
 [python](https://github.com/python/cpython/tree/main/Tools/pixi-packages),
