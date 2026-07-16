@@ -204,7 +204,7 @@ class: text-center
 <div class="text-left">
 
 - build from source
-- simplfy complex build environments
+- simplify complex build environments
 - reproducible across platforms
 
 </div>
