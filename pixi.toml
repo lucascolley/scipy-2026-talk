@@ -1,7 +1,7 @@
 # The deck about Pixi… runs on Pixi. Of course.
 #
 #   pixi install      # one-time, fetch nodejs + pnpm
-#   pixi run dev      # http://localhost:3030
+#   pixi run start    # http://localhost:3030
 #   pixi run build    # static site to ./dist
 #   pixi run export   # PDF export
 
