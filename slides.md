@@ -214,9 +214,11 @@ class: text-center
 
 # Demo:
 
-- Build Python from source!
+Build Python from source!
 
-<Terminal title="install a prerelease CPython, globally">
+<div class="grid grid-cols-2 gap-6 mt-4 items-start">
+
+<Terminal title="install a prerelease CPython">
   <TermLine>pixi global install \</TermLine>
   <div class="term-line pl-8">--git https://github.com/python/cpython \</div>
   <div class="term-line pl-8">--subdir Tools/pixi-packages/default \</div>
@@ -224,6 +226,27 @@ class: text-center
   <div class="term-line pl-8">--force-reinstall \</div>
   <div class="term-line pl-8">python</div>
 </Terminal>
+
+<CodeWindow title="pixi.toml equivalent">
+
+```toml
+[workspace]
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "linux-64"]
+preview = ["pixi-build"]
+
+[dependencies.python]
+git = "https://github.com/python/cpython"
+tag = "v3.15.0b3"
+subdirectory = "Tools/pixi-packages/default"
+
+[tasks]
+start = "python -VV"
+```
+
+</CodeWindow>
+
+</div>
 
 
 ---
