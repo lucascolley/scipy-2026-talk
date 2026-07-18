@@ -3,7 +3,7 @@
     v-if="$nav.currentPage > 1"
     class="master-footer"
   >
-    <span class="master-footer__title">Prefix.dev · Pixi · SciPy 2026</span>
+    <span class="master-footer__title">Pixi · EuroSciPy 2026</span>
     <span class="master-footer__page">
       {{ $nav.currentPage }} / {{ $nav.total }}
     </span>
