@@ -8,6 +8,7 @@ drawings:
 mdc: true
 duration: 25min
 transition: null
+speaker: foo
 ---
 
 <div class="relative mx-auto w-48">
@@ -24,6 +25,8 @@ EuroSciPy 2026 — AGH University of Kraków, Poland
 Tuesday July 21 — <a href="https://pixi.prefix.dev">pixi.prefix.dev</a>
 
 ---
+speaker: Lucas
+---
 
 # Prelude: Tutorial Tomorrow!
 
@@ -31,6 +34,8 @@ Tuesday July 21 — <a href="https://pixi.prefix.dev">pixi.prefix.dev</a>
 
 <img src="/tutorial.png" class="w-130" alt="Tutorial Schedule" />
 
+---
+speaker: Wolf
 ---
 
 # Basics: what is Pixi?
@@ -89,6 +94,8 @@ test = "pytest"
 </div>
 
 ---
+speaker: Wolf
+---
 
 # Basics: tasks
 
@@ -137,6 +144,8 @@ outputs = ["_site/**"]
 </div>
 
 ---
+speaker: Wolf
+---
 
 # Basics: CI made easy
 
@@ -173,6 +182,8 @@ steps:
 </v-clicks>
 
 ---
+speaker: Lucas
+---
 
 # You and your friends are joining the group!
 
@@ -201,6 +212,7 @@ steps:
 ---
 layout: center
 class: text-center
+speaker: Lucas
 ---
 
 # So, why did they all adopt it?
@@ -216,11 +228,15 @@ class: text-center
 </div>
 
 ---
+speaker: Lucas
+---
 
 # TODO: show complicated SciPy dev docs without Pixi
 
 - ...
 
+---
+speaker: Lucas
 ---
 
 # 1. Build compiled code from source
@@ -269,6 +285,8 @@ cython = "*"
 </div>
 </div>
 
+---
+speaker: Lucas
 ---
 
 # 2. Many environments, one manifest
@@ -319,6 +337,8 @@ solve-group = "freethreading"
 </div>
 
 ---
+speaker: Lucas
+---
 
 # 3. Many platforms, pin the exact machine
 
@@ -363,6 +383,8 @@ platforms = ["linux-64", "linux-aarch64",
 
 </v-clicks>
 
+---
+speaker: Wolf
 ---
 
 # Notable recent improvements
@@ -441,11 +463,17 @@ shared-lib = { workspace = true }
 </div>
 
 ---
+speaker: Lucas
+---
 
-# TODO: shoutout https://lucascolley.github.io/talks/europython-26-instrumented/
+# Instrumented Builds of CPython
 
-- ...
+- If you want to better understand why CPython has a `pixi.toml`:
+  - [Talk from the EuroPython Packaging Summit](https://lucascolley.github.io/talks/europython-26-instrumented/)
+- [SciPy](https://github.com/scipy/scipy/pull/24066) and [PyArrow](https://github.com/apache/arrow/pull/49849) are both keen to use this in finding security vulnerabilities and bugs
 
+---
+speaker: Wolf
 ---
 
 # Build and Ship a package: `pixi publish`
@@ -472,6 +500,8 @@ shared-lib = { workspace = true }
 
 </div>
 
+---
+speaker: Lucas
 ---
 
 # Your turn
@@ -524,6 +554,8 @@ Whatever the mode: commit `pixi.toml` **and** `pixi.lock`, teammates just `pixi 
 </div>
 
 ---
+speaker: Lucas
+---
 
 # Grow the environment into a package
 
@@ -572,6 +604,8 @@ pytest = "*"
 </div>
 
 ---
+speaker: Wolf
+---
 
 # Where you can help
 
@@ -583,6 +617,8 @@ pytest = "*"
 
 </v-clicks>
 
+---
+speaker: Wolf
 ---
 
 # A little about Prefix.dev
@@ -608,6 +644,7 @@ We build Pixi, rattler-build, and the `rattler` core, and keep them free.
 ---
 layout: center
 class: text-center
+speaker: Lucas
 ---
 
 # Now time for a live demo on SciPy!

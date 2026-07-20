@@ -1,3 +1,11 @@
+<script setup>
+import { computed } from 'vue'
+import { useNav } from '@slidev/client'
+
+const { currentSlideRoute } = useNav()
+const speaker = computed(() => currentSlideRoute.value?.meta?.slide?.frontmatter?.speaker)
+</script>
+
 <template>
   <footer
     v-if="$nav.currentPage > 1"
@@ -5,11 +13,10 @@
   >
     <span class="master-footer__title">Pixi · EuroSciPy 2026</span>
     <span class="master-footer__page">
-      {{ $nav.currentPage }} / {{ $nav.total }}
+      <template v-if="speaker">{{ speaker }} · </template>{{ $nav.currentPage }} / {{ $nav.total }}
     </span>
   </footer>
 </template>
-
 <style scoped>
 .master-footer {
   position: absolute;
@@ -26,11 +33,9 @@
   pointer-events: none;
   z-index: 10;
 }
-
 .master-footer__title {
   letter-spacing: 0.02em;
 }
-
 .master-footer__page {
   font-variant-numeric: oldstyle-nums;
 }
