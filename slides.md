@@ -231,10 +231,22 @@ speaker: Lucas
 speaker: Lucas
 ---
 
-# TODO: show complicated SciPy dev docs without Pixi
+# Working on SciPy without Pixi...
 
-- ...
-
+<div class="relative h-100">
+  <div v-click.hide class="absolute inset-0">
+    <img src="/scipy-building.png" class="h-16 mx-auto" alt="SciPy docs menu" />
+  </div>
+  <div v-click="[1, 2]" class="absolute inset-0">
+    <img src="/scipy-linux.png" class="w-full h-full object-contain" alt="SciPy docs menu" />
+  </div>
+  <div v-click="[2, 3]" class="absolute inset-0">
+    <img src="/scipy-macos.png" class="w-full h-full object-contain" alt="SciPy docs menu" />
+  </div>
+  <div v-click="3" class="absolute inset-0">
+    <img src="/scipy-win.png" class="w-full h-full object-contain" alt="SciPy docs menu" />
+  </div>
+</div>
 ---
 speaker: Lucas
 ---
