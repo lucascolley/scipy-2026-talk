@@ -300,6 +300,16 @@ solve-group = "freethreading"
 </div>
 
 ---
+speaker: Lucas
+---
+
+# Instrumented Builds of CPython
+
+- If you want to better understand why CPython has a `pixi.toml`:
+  - [Talk from the EuroPython Packaging Summit](https://lucascolley.github.io/talks/europython-26-instrumented/)
+- [SciPy](https://github.com/scipy/scipy/pull/24066) and [PyArrow](https://github.com/apache/arrow/pull/49849) are both keen to use this in finding security vulnerabilities and bugs
+
+---
 speaker: Wolf
 ---
 
@@ -377,16 +387,6 @@ shared-lib = { workspace = true }
 </div>
 
 </div>
-
----
-speaker: Lucas
----
-
-# Instrumented Builds of CPython
-
-- If you want to better understand why CPython has a `pixi.toml`:
-  - [Talk from the EuroPython Packaging Summit](https://lucascolley.github.io/talks/europython-26-instrumented/)
-- [SciPy](https://github.com/scipy/scipy/pull/24066) and [PyArrow](https://github.com/apache/arrow/pull/49849) are both keen to use this in finding security vulnerabilities and bugs
 
 ---
 speaker: Wolf
