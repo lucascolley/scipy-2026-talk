@@ -198,7 +198,7 @@ speaker: Lucas
 - **[pandas](https://github.com/pandas-dev/pandas/blob/main/pixi.toml)** - `pixi.toml` - development environments and a big test matrix, incl. freethreading
 - **[Xarray](https://github.com/pydata/xarray/blob/main/pixi.toml)** - `pixi.toml` - development environments and a big test matrix, incl. nightly builds
 - **[cuda-python](https://github.com/NVIDIA/cuda-python/blob/main/pixi.toml)** - `pixi.toml` - monorepo orchestration: root tasks fan out to sub-package manifests, in CUDA 12 & 13 environments
-- And many more projects in the scientific Python ecosystem: `napari`, `skrub`, `pydata/sparse`, `finch-tensor-lite`
+- And many more projects in the scientific Python ecosystem: `napari`, `skrub`, `pydata/sparse`, `finch-tensor-lite`, `networkx`
 
 <div class="absolute right-12 bottom-16 w-256 flex flex-wrap items-center justify-end gap-x-8 gap-y-6 opacity-90">
   <img src="/python.svg" class="h-10" alt="Python" />
@@ -247,61 +247,12 @@ speaker: Lucas
     <img src="/scipy-win.png" class="w-full h-full object-contain" alt="SciPy docs menu" />
   </div>
 </div>
----
-speaker: Lucas
----
-
-# 1. Build compiled code from source
-
-<DocLink href="https://pixi.prefix.dev/latest/build/getting_started/" label="pixi-build" />
-
-<div class="grid grid-cols-[1.3fr_1fr] gap-6 mt-2">
-
-<CodeWindow title="numpy/pixi-packages/asan/pixi.toml" href="https://github.com/numpy/numpy/blob/main/pixi-packages/asan/pixi.toml">
-
-```toml {lines: true}
-[workspace]
-channels = ["https://prefix.dev/conda-forge"]
-platforms = ["linux-64", "linux-aarch64", "osx-arm64"]
-preview = ["pixi-build"]
-
-# build NumPy itself, with a build backend
-[package.build.backend]
-name = "pixi-build-python"
-
-[package.build.config]
-compilers = ["c", "cxx"]
-extra-args = ["-Csetup-args=-Db_sanitize=address"]
-env.ASAN_OPTIONS = "detect_leaks=0:symbolize=1..."
-
-# even pin a CPython built from git, for this build
-[package.host-dependencies]
-python.git = "https://github.com/python/cpython"
-python.subdirectory = "Tools/pixi-packages/asan"
-meson-python = "*"
-cython = "*"
-```
-
-</CodeWindow>
-
-<div>
-
-<v-clicks>
-
-- conda-forge ships the **compilers** (C/C++/Fortran/CUDA), not just wheels
-- compiles NumPy in the reproducible env
-- compiles CPython from source, with ASAN
-
-</v-clicks>
-
-</div>
-</div>
 
 ---
 speaker: Lucas
 ---
 
-# 2. Many environments, one manifest
+# Many environments, one manifest
 
 <DocLink href="https://pixi.prefix.dev/latest/workspace/multi_environment/" label="environments" />
 
@@ -347,53 +298,6 @@ solve-group = "freethreading"
 
 </div>
 </div>
-
----
-speaker: Lucas
----
-
-# 3. Many platforms, pin the exact machine
-
-<DocLink href="https://pixi.prefix.dev/latest/workspace/multi_platform_configuration/" label="multi-platform" />
-
-<div class="grid grid-cols-2 gap-6 mt-2 items-start">
-
-<CodeWindow title="scipy/pixi.toml" href="https://github.com/scipy/scipy/blob/main/pixi.toml">
-
-```toml {lines: true}
-[workspace]
-platforms = [
-  "linux-64", "osx-arm64", "win-64", "linux-aarch64",
-  # same lockfile, GPU targets too:
-  { platform = "linux-64", cuda = "12.9" },
-  { platform = "linux-64", cuda = "13.0" },
-]
-```
-
-</CodeWindow>
-
-<CodeWindow title="pandas/pixi.toml" href="https://github.com/pandas-dev/pandas/blob/main/pixi.toml">
-
-```toml {lines: true}
-platforms = ["linux-64", "linux-aarch64",
-             "osx-64", "osx-arm64", "win-64"]
-# environments:
-# py311/py312/py313/py314, minimum-versions
-# numpy-nightly, downstream, freethreading
-```
-
-</CodeWindow>
-
-</div>
-
-<v-clicks>
-
-- The solver treats hardware as **virtual packages**: `__cuda`, `__glibc`, `__osx`, `__archspec`
-- So the lockfile pins the **exact machine**, not "some Linux"
-- One `pixi.lock` resolves for laptop, CI, an A100 node, and `aarch64`, with the right CUDA build only where there's a GPU
-- pandas runs a whole **test matrix** from one manifest
-
-</v-clicks>
 
 ---
 speaker: Wolf
