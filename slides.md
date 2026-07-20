@@ -1,17 +1,14 @@
 ---
 # Tufte-inspired theme, local in ./slidev-theme-tufte
 theme: ./slidev-theme-tufte
-title: They all have a pixi.toml. Why?
-info: |
-  ## Scipy, Numpy, Xarray and Python all have a pixi.toml. Why?
-  After 3 years, Pixi is widely adopted in the scientific Python ecosystem.
-  SciPy 2026, Ruben Arts, prefix.dev
+title: "Pixi: better developer experience for scientific Python projects"
 class: text-center
 drawings:
   persist: false
 mdc: true
 duration: 25min
 transition: null
+speaker: foo
 ---
 
 <div class="relative mx-auto w-48">
@@ -19,44 +16,58 @@ transition: null
 </div>
 <img src="/slides-qr-code.png" class="absolute top-8 right-8 w-35" alt="Slides QR code" />
 
-# Scipy, Numpy, Xarray and Python
+# Pixi: better developer experience for scientific Python projects
 
-## ...all have a `pixi.toml`. Why?
+<div class="subtitle mt-8">Lucas Colley & Wolf Vollprecht <img src="/prefix-logo.svg" class="inline align-middle h-5 mx-1" alt="prefix.dev" /></div>
 
-Ruben Arts at <img src="/prefix-logo.svg" class="inline align-middle h-5 mx-1" alt="prefix.dev" />
+EuroSciPy 2026 — AGH University of Kraków, Poland
 
-<div class="subtitle mt-8">SciPy 2026 - <a href="https://pixi.sh">pixi.sh</a></div>
+Tuesday July 21 — <a href="https://pixi.prefix.dev">pixi.prefix.dev</a>
 
+---
+speaker: Lucas
+---
 
+# Prelude: Tutorial Tomorrow!
+
+- If you like what you hear in this talk, learn how to use it with Mike tomorrow at 9am!
+
+<img src="/tutorial.png" class="w-130" alt="Tutorial Schedule" />
+
+---
+speaker: Wolf
 ---
 
 # Basics: what is Pixi?
 
 <DocLink href="https://pixi.prefix.dev/latest/getting_started/" label="getting started" />
 
-Cross-platform, environment management and build tool for any language.
+Cross-platform environment management and build tool for any language.
 <div class="grid grid-cols-2 gap-8 mt-6">
 
-<div>
-<div v-click="1">
+<div class="relative">
+  <div v-click="[1, 2]" class="absolute inset-0">
+  One 'manifest' describes a whole project:
+    
+  - **dependencies**: use conda *and/or* PyPI packages
+  - **environments**:
+    - isolate different dev environments
+    - match in CI and locally
+  - **tasks**: define repeatable development tasks
+  - a **cross-platform lock file**: `pixi.lock`
+    - records _exact_ dependencies for reproducibility
 
-One manifest describes a whole project:
+  </div>
 
-- **dependencies**: conda *and* PyPI, together
-- **tasks**: run the same command everywhere
-- **environments**: construct usecase specific envs
-- a **cross-platform lockfile**: `pixi.lock`
-</div>
-
-<div v-click="2" class="mt-4">
-
-It replaces the pile you keep in your README:
-
-- `apt`, `brew`, `pip`, `conda`
-- `virtualenv`, `venv`, `conda env`
-- Makefiles, shell scripts, CI YAML
-
-</div>
+  <div v-click="2" class="absolute inset-0">
+  
+  It replaces the pile you keep in your README:
+  
+  - `apt`, `brew`, `pip`, `conda`
+  - `virtualenv`, `venv`, `conda env`
+  - Makefiles, shell scripts, CI YAML
+  
+  </div>
 </div>
 
 <CodeWindow v-click="1" title="pixi.toml">
@@ -82,7 +93,8 @@ test = "pytest"
   <img src="/conda-forge.png" class="h-40" alt="conda-forge" />
 </div>
 
-
+---
+speaker: Wolf
 ---
 
 # Basics: tasks
@@ -132,6 +144,8 @@ outputs = ["_site/**"]
 </div>
 
 ---
+speaker: Wolf
+---
 
 # Basics: CI made easy
 
@@ -168,6 +182,8 @@ steps:
 </v-clicks>
 
 ---
+speaker: Lucas
+---
 
 # You and your friends are joining the group!
 
@@ -182,7 +198,7 @@ steps:
 - **[pandas](https://github.com/pandas-dev/pandas/blob/main/pixi.toml)** - `pixi.toml` - development environments and a big test matrix, incl. freethreading
 - **[Xarray](https://github.com/pydata/xarray/blob/main/pixi.toml)** - `pixi.toml` - development environments and a big test matrix, incl. nightly builds
 - **[cuda-python](https://github.com/NVIDIA/cuda-python/blob/main/pixi.toml)** - `pixi.toml` - monorepo orchestration: root tasks fan out to sub-package manifests, in CUDA 12 & 13 environments
-- And many more projects in the scientific Python ecosystem
+- And many more projects in the scientific Python ecosystem: `napari`, `skrub`, `pydata/sparse`, `finch-tensor-lite`
 
 <div class="absolute right-12 bottom-16 w-256 flex flex-wrap items-center justify-end gap-x-8 gap-y-6 opacity-90">
   <img src="/python.svg" class="h-10" alt="Python" />
@@ -196,6 +212,7 @@ steps:
 ---
 layout: center
 class: text-center
+speaker: Lucas
 ---
 
 # So, why did they all adopt it?
@@ -203,52 +220,23 @@ class: text-center
 <div class="flex justify-center mt-6">
 <div class="text-left">
 
-- build from source
-- simplify complex build environments
-- reproducible across platforms
+- build from source reproducibly across platforms
+- simplify complex build environments with non-PyPI dependencies
+- new contributors can follow the exact same workflow as lead maintainers easily
 
 </div>
 </div>
 
 ---
+speaker: Lucas
+---
 
-# Demo:
+# TODO: show complicated SciPy dev docs without Pixi
 
-Build Python from source!
+- ...
 
-<div class="grid grid-cols-2 gap-6 mt-4 items-start">
-
-<Terminal title="install a prerelease CPython">
-  <TermLine>pixi global install \</TermLine>
-  <div class="term-line pl-8">--git https://github.com/python/cpython \</div>
-  <div class="term-line pl-8">--subdir Tools/pixi-packages/default \</div>
-  <div class="term-line pl-8">--tag v3.15.0b3 \</div>
-  <div class="term-line pl-8">--force-reinstall \</div>
-  <div class="term-line pl-8">python</div>
-</Terminal>
-
-<CodeWindow title="pixi.toml equivalent">
-
-```toml
-[workspace]
-channels = ["conda-forge"]
-platforms = ["osx-arm64", "linux-64"]
-preview = ["pixi-build"]
-
-[dependencies.python]
-git = "https://github.com/python/cpython"
-tag = "v3.15.0b3"
-subdirectory = "Tools/pixi-packages/default"
-
-[tasks]
-start = "python -VV"
-```
-
-</CodeWindow>
-
-</div>
-
-
+---
+speaker: Lucas
 ---
 
 # 1. Build compiled code from source
@@ -297,6 +285,8 @@ cython = "*"
 </div>
 </div>
 
+---
+speaker: Lucas
 ---
 
 # 2. Many environments, one manifest
@@ -347,6 +337,8 @@ solve-group = "freethreading"
 </div>
 
 ---
+speaker: Lucas
+---
 
 # 3. Many platforms, pin the exact machine
 
@@ -391,6 +383,8 @@ platforms = ["linux-64", "linux-aarch64",
 
 </v-clicks>
 
+---
+speaker: Wolf
 ---
 
 # Notable recent improvements
@@ -468,7 +462,18 @@ shared-lib = { workspace = true }
 
 </div>
 
+---
+speaker: Lucas
+---
 
+# Instrumented Builds of CPython
+
+- If you want to better understand why CPython has a `pixi.toml`:
+  - [Talk from the EuroPython Packaging Summit](https://lucascolley.github.io/talks/europython-26-instrumented/)
+- [SciPy](https://github.com/scipy/scipy/pull/24066) and [PyArrow](https://github.com/apache/arrow/pull/49849) are both keen to use this in finding security vulnerabilities and bugs
+
+---
+speaker: Wolf
 ---
 
 # Build and Ship a package: `pixi publish`
@@ -487,7 +492,6 @@ shared-lib = { workspace = true }
 <v-clicks>
 
 - **Publish** your package to a channel, SciPy already does this [in CI](https://github.com/scipy/scipy/blob/main/.github/workflows/pixi-packages.yml)
-- 
 - **Trusted publishing**: OIDC, attestations, no long-lived tokens
 
 </v-clicks>
@@ -497,63 +501,7 @@ shared-lib = { workspace = true }
 </div>
 
 ---
-
-# Ship a whole environment: `pixi pack`
-
-<DocLink href="https://pixi.prefix.dev/latest/deployment/pixi_pack/" label="pixi pack" />
-
-<div class="grid grid-cols-2 gap-6 mt-4 items-start">
-
-<Terminal title="freeze the environment">
-  <TermLine>pixi pack --platform linux-64</TermLine>
-  <TermLine output>📦 environment.tar, no pixi/conda needed on target</TermLine>
-</Terminal>
-
-<div>
-
-<v-clicks>
-
-- Freezes the **locked environment** into a single archive
-- Made for **air-gapped / cluster** runs: nothing to install on the target
-- Unpack and run: the same lockfile-exact environment, anywhere
-
-</v-clicks>
-
-</div>
-
-</div>
-
-<div v-click class="mt-4 text-center opacity-80">
-
-Research → production, same tool, same lockfile.
-
-</div>
-
----
-layout: center
-class: text-center
----
-
-# This is the dream
-
-<div class="text-left mt-10 mx-auto w-max max-w-full">
-
-<Terminal title="Terminal">
-  <TermLine v-click="1">git clone https://github.com/my-org/my-science-project.git</TermLine>
-  <TermLine v-click="1">cd my-science-project</TermLine>
-  <TermLine v-click="2">pixi run start</TermLine>
-  <TermLine output v-click="2">✓ environment resolved & installed</TermLine>
-  <TermLine output v-click="2">✓ running analysis.py ...</TermLine>
-</Terminal>
-
-</div>
-
-<div v-click="3" class="mt-8 opacity-80">
-
-That's the file Python, NumPy, SciPy, pandas and Xarray all committed. That's the why.
-
-</div>
-
+speaker: Lucas
 ---
 
 # Your turn
@@ -606,6 +554,8 @@ Whatever the mode: commit `pixi.toml` **and** `pixi.lock`, teammates just `pixi 
 </div>
 
 ---
+speaker: Lucas
+---
 
 # Grow the environment into a package
 
@@ -654,18 +604,21 @@ pytest = "*"
 </div>
 
 ---
+speaker: Wolf
+---
 
 # Where you can help
 
 <v-clicks>
 
-- **Try Pixi** share your experience and help us and other improve it.
+- **Try Pixi** — share your experience and help us and others improve it.
 - **[Contribute to conda-forge](https://conda-forge.org/docs/maintainer/adding_pkgs/)**: add the packages your field needs, so everyone can `pixi add` them
 - **Join our [Discord](https://discord.gg/kKV8ZxyzY4)** and help us and others with your experience, or just hang out and chat.
 
 </v-clicks>
 
-
+---
+speaker: Wolf
 ---
 
 # A little about Prefix.dev
@@ -691,13 +644,25 @@ We build Pixi, rattler-build, and the `rattler` core, and keep them free.
 ---
 layout: center
 class: text-center
+speaker: Lucas
 ---
 
-# Thanks, SciPy.
+# Now time for a live demo on SciPy!
+
+---
+layout: center
+class: text-center
+---
+
+# Thanks, EuroSciPy!
 
 <img src="/slides-qr-code.png" class="absolute top-8 right-8 w-35" alt="Slides QR code" />
 
-<img src="/prefix-logo.svg" class="h-24 mx-auto mt-4 mb-6" alt="prefix.dev" />
+<img src="/paxton.png" class="h-50 mx-auto mt-4 mb-6" alt="Paxton" />
+
+Thanks to the EuroSciPy 2026 organisers and volunteers!
+
+<div class="mt-6">
 
 Read the real files:
 [python](https://github.com/python/cpython/tree/main/Tools/pixi-packages),
@@ -707,12 +672,8 @@ Read the real files:
 [xarray](https://github.com/pydata/xarray/blob/main/pixi.toml),
 [cuda-python](https://github.com/NVIDIA/cuda-python/blob/main/pixi.toml)
 
-<div class="mt-6">
-
-[pixi.sh](https://pixi.sh) - [prefix.dev](https://prefix.dev) - [github.com/prefix-dev](https://github.com/prefix-dev)
+[pixi.prefix.dev](https://pixi.prefix.dev) - [prefix.dev](https://prefix.dev) - [github.com/prefix-dev](https://github.com/prefix-dev)
 
 </div>
 
 <br/>
-
-*Happy to talk builds, environments, GPU targeting, or reproducibility.*
