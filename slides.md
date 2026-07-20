@@ -231,7 +231,7 @@ speaker: Lucas
 speaker: Lucas
 ---
 
-# Working on SciPy without Pixi...
+# Working on SciPy without conda/Pixi...
 
 <div class="relative h-100">
   <div v-click.hide class="absolute inset-0">
@@ -307,7 +307,110 @@ speaker: Lucas
 
 - If you want to better understand why CPython has a `pixi.toml`:
   - [Talk from the EuroPython Packaging Summit](https://lucascolley.github.io/talks/europython-26-instrumented/)
+  - Depending on a from-source build of a project like CPython should not be a mystery
 - [SciPy](https://github.com/scipy/scipy/pull/24066) and [PyArrow](https://github.com/apache/arrow/pull/49849) are both keen to use this in finding security vulnerabilities and bugs
+
+---
+speaker: Lucas
+---
+
+# Your turn
+
+<DocLink href="https://pixi.prefix.dev/latest/reference/cli/pixi/init/" label="pixi init" />
+
+<div class="grid grid-cols-[1.2fr_1fr] gap-8 mt-6">
+
+<div>
+
+<Terminal title="pick where you are">
+  <TermLine output v-click="1"># 1. start fresh</TermLine>
+  <TermLine v-click="1">pixi init my-analysis && cd my-analysis</TermLine>
+  <TermLine v-click="1">pixi add python numpy matplotlib</TermLine>
+  <TermLine output v-click="2"># 2. coming from conda / mamba</TermLine>
+  <TermLine v-click="2">pixi init --import environment.yml</TermLine>
+  <TermLine output v-click="3"># 3. already a Python package</TermLine>
+  <TermLine v-click="3">pixi init --format pyproject</TermLine>
+</Terminal>
+
+</div>
+
+<div>
+
+<div v-click="1" class="mt-2">
+
+**Start fresh**: manifest, environment and lockfile appear as you go
+
+</div>
+
+<div v-click="2" class="mt-4">
+
+**Import**: channels and dependencies come along from `environment.yml`
+
+</div>
+
+<div v-click="3" class="mt-4">
+
+**Extend**: pixi lives inside `pyproject.toml` under `[tool.pixi]`; your PyPI deps stay where they are
+
+</div>
+
+<div v-click="4" class="mt-6">
+
+Whatever the mode: commit `pixi.toml` **and** `pixi.lock`, teammates just `pixi run`
+
+</div>
+
+</div>
+</div>
+
+---
+speaker: Lucas
+---
+
+# Grow the environment into a package
+
+<DocLink href="https://pixi.prefix.dev/latest/build/dev/" label="dev packages" />
+
+<div class="grid grid-cols-[1.2fr_1fr] gap-6 mt-2">
+
+<CodeWindow title="pixi.toml">
+
+```toml {lines: true}
+[workspace]
+channels = ["https://prefix.dev/conda-forge"]
+platforms = ["linux-64", "osx-arm64", "win-64"]
+preview = ["pixi-build"]
+
+# your project becomes a real conda package
+[package.build.backend]
+name = "pixi-build-python"
+version = "*"
+
+[package.run-dependencies]
+numpy = "*"
+
+# develop against it, without installing it
+[dev]
+my-project = { path = "." }
+
+[dependencies]
+pytest = "*"
+```
+
+</CodeWindow>
+
+<div>
+
+<v-clicks>
+
+- Add a `[package]` section to specify how your project is packaged and used by others
+- `[dev]` + a **path dependency**: the package's build/host/run deps land in your env, the package itself isn't built. Only need to specify deps in one place
+- From here: `pixi publish`, or others depend on you straight **from git**
+
+</v-clicks>
+
+</div>
+</div>
 
 ---
 speaker: Wolf
@@ -414,109 +517,6 @@ speaker: Wolf
 
 </div>
 
-</div>
-
----
-speaker: Lucas
----
-
-# Your turn
-
-<DocLink href="https://pixi.prefix.dev/latest/reference/cli/pixi/init/" label="pixi init" />
-
-<div class="grid grid-cols-[1.2fr_1fr] gap-8 mt-6">
-
-<div>
-
-<Terminal title="pick where you are">
-  <TermLine output v-click="1"># 1. start fresh</TermLine>
-  <TermLine v-click="1">pixi init my-analysis && cd my-analysis</TermLine>
-  <TermLine v-click="1">pixi add python numpy matplotlib</TermLine>
-  <TermLine output v-click="2"># 2. coming from conda / mamba</TermLine>
-  <TermLine v-click="2">pixi init --import environment.yml</TermLine>
-  <TermLine output v-click="3"># 3. already a Python package</TermLine>
-  <TermLine v-click="3">pixi init --format pyproject</TermLine>
-</Terminal>
-
-</div>
-
-<div>
-
-<div v-click="1" class="mt-2">
-
-**Start fresh**: manifest, environment and lockfile appear as you go
-
-</div>
-
-<div v-click="2" class="mt-4">
-
-**Import**: channels and dependencies come along from `environment.yml`
-
-</div>
-
-<div v-click="3" class="mt-4">
-
-**Extend**: pixi lives inside `pyproject.toml` under `[tool.pixi]`; your PyPI deps stay where they are
-
-</div>
-
-<div v-click="4" class="mt-6">
-
-Whatever the mode: commit `pixi.toml` **and** `pixi.lock`, teammates just `pixi run`
-
-</div>
-
-</div>
-</div>
-
----
-speaker: Lucas
----
-
-# Grow the environment into a package
-
-<DocLink href="https://pixi.prefix.dev/latest/build/dev/" label="dev packages" />
-
-<div class="grid grid-cols-[1.2fr_1fr] gap-6 mt-2">
-
-<CodeWindow title="pixi.toml">
-
-```toml {lines: true}
-[workspace]
-channels = ["https://prefix.dev/conda-forge"]
-platforms = ["linux-64", "osx-arm64", "win-64"]
-preview = ["pixi-build"]
-
-# your project becomes a real conda package
-[package.build.backend]
-name = "pixi-build-python"
-version = "*"
-
-[package.run-dependencies]
-numpy = "*"
-
-# develop against it, without installing it
-[dev]
-my-project = { path = "." }
-
-[dependencies]
-pytest = "*"
-```
-
-</CodeWindow>
-
-<div>
-
-<v-clicks>
-
-- Adding a `[package]` section is the **same move** NumPy, SciPy and CPython made
-- `[dev]` + a **path dependency**: the package's build/host/run deps land in your env, the package itself isn't built. Fast dev loop
-- Path dependencies split one repo into **multiple packages** as it grows
-- From here: `pixi publish`, or others depend on you straight **from git**
-
-</v-clicks>
-
-</div>
 </div>
 
 ---
