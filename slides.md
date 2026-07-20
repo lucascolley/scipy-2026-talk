@@ -35,6 +35,17 @@ speaker: Lucas
 <img src="/tutorial.png" class="w-130" alt="Tutorial Schedule" />
 
 ---
+speaker: Lucas
+---
+
+# Agenda
+
+1. Pixi basics (Wolf)
+2. Pixi in the scientific Python world (Lucas)
+3. Some recent updates and how you can get involved (Wolf)
+4. Live demo on SciPy (Lucas)
+
+---
 speaker: Wolf
 ---
 
