@@ -427,6 +427,34 @@ pytest = "*"
 speaker: Wolf
 ---
 
+# Build and Ship a package: `pixi publish`
+
+<DocLink href="https://pixi.prefix.dev/latest/reference/cli/pixi/publish/" label="pixi publish" />
+
+<div class="grid grid-cols-2 gap-6 mt-4 items-start">
+
+<Terminal title="build & ship a package">
+  <TermLine>pixi publish --target-channel https://prefix.dev/my-channel</TermLine>
+  <TermLine output>✓ built, pushed, attested (OIDC)</TermLine>
+</Terminal>
+
+<div>
+
+<v-clicks>
+
+- **Publish** your package to a channel, SciPy already does this [in CI](https://github.com/scipy/scipy/blob/main/.github/workflows/pixi-packages.yml)
+- **Trusted publishing**: OIDC, attestations, no long-lived tokens
+
+</v-clicks>
+
+</div>
+
+</div>
+
+---
+speaker: Wolf
+---
+
 # Notable recent improvements
 
 <DocLink href="https://pixi.prefix.dev/latest/reference/pixi_manifest/" label="manifest" />
@@ -497,34 +525,6 @@ shared-lib = { workspace = true }
 ```
 
 </CodeWindow>
-
-</div>
-
-</div>
-
----
-speaker: Wolf
----
-
-# Build and Ship a package: `pixi publish`
-
-<DocLink href="https://pixi.prefix.dev/latest/reference/cli/pixi/publish/" label="pixi publish" />
-
-<div class="grid grid-cols-2 gap-6 mt-4 items-start">
-
-<Terminal title="build & ship a package">
-  <TermLine>pixi publish --target-channel https://prefix.dev/my-channel</TermLine>
-  <TermLine output>✓ built, pushed, attested (OIDC)</TermLine>
-</Terminal>
-
-<div>
-
-<v-clicks>
-
-- **Publish** your package to a channel, SciPy already does this [in CI](https://github.com/scipy/scipy/blob/main/.github/workflows/pixi-packages.yml)
-- **Trusted publishing**: OIDC, attestations, no long-lived tokens
-
-</v-clicks>
 
 </div>
 
